@@ -6,7 +6,7 @@ OPTIONS (location = 'us-east1');
 CREATE OR REPLACE EXTERNAL TABLE `abiding-bongo-485522-a4.nytaxi.external_yellow_tripdata`
 OPTIONS (
   format = 'PARQUET',
-  uris = ['gs://tyler_taxi_bucket/yellow/*.parquet']
+  uris = ['gs://tyler_taxi_bucket/*.parquet']
 );
 
 -- Test it. --
