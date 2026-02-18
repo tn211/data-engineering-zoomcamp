@@ -17,3 +17,5 @@ serving_dir
 *.parquet
 *.csv
 gcp.json
+
+.bruin.yml
