@@ -1,0 +1,15 @@
+name: taxi-pipeline
+
+schedule: daily
+
+start_date: "2026-02-22"
+
+default_connections:
+  duckdb: duckdb_default
+
+variables:
+  taxi_types:
+    type: array
+    items:
+      type: string
+    default: ["yellow", "green"]
