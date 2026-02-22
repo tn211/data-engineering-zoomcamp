@@ -8,7 +8,9 @@ depends:
 
 materialization:
   type: table
-  strategy: create+replace
+  strategy: time_interval
+  incremental_key: pickup_date
+  time_granularity: date
 
 columns:
   - name: service_type
