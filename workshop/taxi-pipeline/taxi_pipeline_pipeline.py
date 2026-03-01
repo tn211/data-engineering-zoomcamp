@@ -5,11 +5,9 @@
 
 # In[12]:
 
-
 import dlt
 from dlt.sources.rest_api import rest_api_source
 from dlt.sources.rest_api.typing import PageNumberPaginatorConfig
-
 
 # ----
 
@@ -21,7 +19,8 @@ from dlt.sources.rest_api.typing import PageNumberPaginatorConfig
 def ny_taxi_source():
     return rest_api_source({
         "client": {
-            "base_url": "https://us-central1-dlthub-analytics.cloudfunctions.net",
+            "base_url":
+            "https://us-central1-dlthub-analytics.cloudfunctions.net",
         },
         "resource_defaults": {
             "write_disposition": "replace",
@@ -49,7 +48,6 @@ def ny_taxi_source():
 
 # In[3]:
 
-
 pipeline = dlt.pipeline(
     pipeline_name="ny_taxi",
     destination="duckdb",
@@ -57,21 +55,17 @@ pipeline = dlt.pipeline(
     progress="log",
 )
 
-
 # ---
 
 # #### Extract.
 
 # In[4]:
 
-
 extract_info = pipeline.extract(ny_taxi_source())
-
 
 # ---
 
 # In[5]:
-
 
 load_id = extract_info.loads_ids[-1]
 m = extract_info.metrics[load_id][0]
@@ -86,13 +80,11 @@ for resource, rm in m["resource_metrics"].items():
     print(f"rows extracted: {rm.items_count}")
     print()
 
-
 # ---
 
 # #### Normalization.
 
 # In[6]:
-
 
 normalize_info = pipeline.normalize()
 load_id = normalize_info.loads_ids[-1]
@@ -108,16 +100,13 @@ for table_name, tm in m["table_metrics"].items():
         continue
     print(f"  - {table_name}: {tm.items_count} rows")
 
-
 # ---
 
 # #### Load.
 
 # In[7]:
 
-
 load_info = pipeline.load()
-
 
 # ---
 
@@ -125,14 +114,17 @@ load_info = pipeline.load()
 
 # In[8]:
 
-
 ds = pipeline.dataset()
 ds.tables
 
-
 # In[10]:
 
-
-df = ds.rides.df()  
+df = ds.rides.df()
 df.head(10)
 
+if __name__ == "__main__":
+    ds = pipeline.dataset()
+    print(ds.tables)
+
+    df = ds.rides.df()
+    print(df.head(10))

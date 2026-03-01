@@ -11,4 +11,5 @@ dependencies = [
     "jupyter>=1.1.1",
     "pandas>=3.0.1",
     "pip>=26.0.1",
+    "yapf>=0.43.0",
 ]
