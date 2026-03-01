@@ -1,0 +1,31 @@
+https://dlthub.com/docs/api_reference/dlt/sources/helpers/rest_client/paginators
+
+Yes — I need the dlt docs for `PageNumberPaginatorConfig` to see the exact valid field names rather than guessing. Let me look it up.Now I have the actual signature. `PageNumberPaginator.__init__` takes `base_page` (defaults to 0), `total_path` (defaults to `"total"`), and `stop_after_empty_page` (defaults to `True`). The problem with 0 rows is that `total_path` defaults to `"total"` — the API doesn't return a `total` field, so it thinks there are 0 pages. Fix:
+
+```python
+def ny_taxi_source():
+    return rest_api_source({
+        "client": {
+            "base_url": "https://us-central1-dlthub-analytics.cloudfunctions.net",
+        },
+        "resource_defaults": {
+            "write_disposition": "replace",
+        },
+        "resources": [
+            {
+                "name": "rides",
+                "endpoint": {
+                    "path": "data_engineering_zoomcamp_api",
+                    "paginator": {
+                        "type": "page_number",
+                        "page_param": "page",
+                        "base_page": 1,
+                        "total_path": None,
+                    },
+                },
+            },
+        ],
+    })
+```
+
+`total_path: None` tells it to ignore any total count and rely on `stop_after_empty_page` (which is already `True` by default) to know when to stop. `base_page: 1` because the API starts at page 1.

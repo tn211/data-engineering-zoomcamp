@@ -1,0 +1,41 @@
+I need to adapt this linked notebook to pull from this source (show me code, do not return an ipynb.):
+
+PropertyValueBase URL`https://us-central1-dlthub-analytics.cloudfunctions.net/data_engineering_zoomcamp_api`FormatPaginated JSONPage Size1,000 records per pagePaginationStop when an empty page is returned
+
+here is the data structure first:
+
+
+import requests
+r = requests.get(
+    "https://us-central1-dlthub-analytics.cloudfunctions.net/data_engineering_zoomcamp_api",
+    params={"page": 1}
+)
+import json
+print(json.dumps(r.json()[:1] if isinstance(r.json(), list) else r.json(), indent=2))
+
+[
+  {
+    "End_Lat": 40.742963,
+    "End_Lon": -73.980072,
+    "Fare_Amt": 45.0,
+    "Passenger_Count": 1,
+    "Payment_Type": "Credit",
+    "Rate_Code": null,
+    "Start_Lat": 40.641525,
+    "Start_Lon": -73.787442,
+    "Tip_Amt": 9.0,
+    "Tolls_Amt": 4.15,
+    "Total_Amt": 58.15,
+    "Trip_Distance": 17.52,
+    "Trip_Dropoff_DateTime": "2009-06-14 23:48:00",
+    "Trip_Pickup_DateTime": "2009-06-14 23:23:00",
+    "mta_tax": null,
+    "store_and_forward": null,
+    "surcharge": 0.0,
+    "vendor_name": "VTS"
+  }
+]
+
+next I will show you my existing notebook. only show me how to do up until the Extract step. DO NOT WRITE ANY COMMENTS, EVER. I've attempted this repeatedly with you but you keep getting an error with pagination:
+
+"The params block shouldn't have a typed page entry — the paginator handles that automatically. Remove the params.page dict entirely:"

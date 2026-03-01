@@ -1,0 +1,25 @@
+taxi-pipeline ➜ uv run dlt init dlthub:taxi_pipeline duckdb                                                                                                                                          main
+dlt will generate useful project rules tailored to your assistant/IDE.
+Press Enter to accept the default (cursor), or type a name: claude
+Initializing pipeline taxi_pipeline_pipeline.py, adding claude rules, code snippets and docs for taxi_pipeline source.
+Do you want to proceed? [Y/n]: y
+
+Your new pipeline taxi_pipeline is ready to be customized!
+* Review and change how dlt loads your data in taxi_pipeline_pipeline.py
+* Add credentials for duckdb and other secrets to ./.dlt/secrets.toml
+* requirements.txt was created. Install it with:
+pip3 install -r requirements.txt
+* Read https://dlthub.com/docs/walkthroughs/create-a-pipeline for more information
+
+
+Looking up IDE rules and configuration https://github.com/dlt-hub/verified-sources.git...
+
+This command and rule-set is a work in progress. Currently we provide rules specific to one workflow:
+creating REST API sources and pipeline from legacy code, OpenAPI specs, REST API documentation but also from scratch.
+
+1 file(s) supporting claude were copied.
+
+
+Looking up in dltHub for rules, docs and snippets for taxi_pipeline...
+WARNING: We have nothing for taxi_pipeline at dltHub yet.
+[I] 🌧  taxi-pipeline ➜                                                                                                                                                                                      main
