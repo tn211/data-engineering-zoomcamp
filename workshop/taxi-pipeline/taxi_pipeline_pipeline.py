@@ -110,18 +110,6 @@ load_info = pipeline.load()
 
 # ---
 
-# #### Data inspection.
-
-# In[8]:
-
-ds = pipeline.dataset()
-ds.tables
-
-# In[10]:
-
-df = ds.rides.df()
-df.head(10)
-
 if __name__ == "__main__":
     ds = pipeline.dataset()
     print(ds.tables)
