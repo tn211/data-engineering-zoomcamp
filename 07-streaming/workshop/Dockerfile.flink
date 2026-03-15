@@ -4,9 +4,12 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
 
 # ref: https://nightlies.apache.org/flink/flink-docs-release-2.2/docs/deployment/resource-providers/standalone/docker/#using-flink-python-on-docker
 
+USER root
 WORKDIR /opt/pyflink
 COPY pyproject.flink.toml pyproject.toml
-RUN uv python install 3.12 && uv sync
+RUN apt-get update && apt-get install -y --no-install-recommends openjdk-17-jdk-headless gcc libc6-dev && rm -rf /var/lib/apt/lists/*
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-arm64
+RUN uv python install 3.12 && uv sync && chmod a+rx /root && chmod -R a+rX /root/.local
 ENV PATH="/opt/pyflink/.venv/bin:$PATH"
 
 # Download connector libraries
